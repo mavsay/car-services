@@ -1,4 +1,5 @@
 'use strict'
+
 const cars = [
   {
     id: 'cars1',
@@ -13,7 +14,7 @@ const cars = [
   {
     id: 'cars3',
     name: 'HONDA',
-    models: ['CIVIC', 'ACCORD', 'CITY']
+    models: ['CITY','CIVIC', 'ACCORD']
   },
   {
     id: 'cars4',
@@ -21,6 +22,7 @@ const cars = [
     models: ['A6', 'S6', 'RS6']
   },
 ];
+
 
 const works = [
   {
@@ -42,70 +44,442 @@ const works = [
 ]
 
 
-const models = [
-  {
-    brand: 'VOLKSWAGEN',
-    model: 'POLO',
-    services: ['VTM-AUTO'],
-  },
-  {
-    brand: 'VOLKSWAGEN',
-    model: 'JETTA',
-    services: ['VTM-AUTO'],
-  },
-  {
-    brand: 'VOLKSWAGEN',
-    model: 'PASSAT',
-    services: ['VTM-AUTO'],
-  },
+// const models = [
+//   {
+//     brand: 'VOLKSWAGEN',
+//     model: 'POLO',
+//     services: ['VTM-AUTO'],
+//   },
+//   {
+//     brand: 'VOLKSWAGEN',
+//     model: 'JETTA',
+//     services: ['VTM-AUTO'],
+//   },
+//   {
+//     brand: 'VOLKSWAGEN',
+//     model: 'PASSAT',
+//     services: ['VTM-AUTO'],
+//   },
 
-  {
-    brand: 'AUDI',
-    model: 'A6',
-    services: ['VTM-AUTO', 'GTM-AUTO'],
-  },
-  {
-    brand: 'AUDI',
-    model: 'S6',
-    services: ['VTM-AUTO', 'GTM-AUTO'],
-  },
-  {
-    brand: 'AUDI',
-    model: 'RS6',
-    services: ['VTM-AUTO'],
-  },
+//   {
+//     brand: 'AUDI',
+//     model: 'A6',
+//     services: ['VTM-AUTO', 'GTM-AUTO'],
+//   },
+//   {
+//     brand: 'AUDI',
+//     model: 'S6',
+//     services: ['VTM-AUTO', 'GTM-AUTO'],
+//   },
+//   {
+//     brand: 'AUDI',
+//     model: 'RS6',
+//     services: ['VTM-AUTO'],
+//   },
 
 
-  {
-    brand: 'TOYOTA',
-    model: 'COROLLA',
-    services: ['TTS-AUTO'],
-  },
-  {
-    brand: 'TOYOTA',
-    model: 'CAMRY',
-    services: ['TTS-AUTO'],
-  },
-  {
-    brand: 'TOYOTA',
-    model: 'RAV-4',
-    services: ['TTS-AUTO'],
-  },
+//   {
+//     brand: 'TOYOTA',
+//     model: 'COROLLA',
+//     services: ['TTS-AUTO'],
+//   },
+//   {
+//     brand: 'TOYOTA',
+//     model: 'CAMRY',
+//     services: ['TTS-AUTO'],
+//   },
+//   {
+//     brand: 'TOYOTA',
+//     model: 'RAV-4',
+//     services: ['TTS-AUTO'],
+//   },
 
+//   {
+//     brand: 'HONDA',
+//     model: 'CIVIC',
+//     services: ['TTS-AUTO'],
+//   },
+//   {
+//     brand: 'HONDA',
+//     model: 'ACCORD',
+//     services: ['TTS-AUTO'],
+//   },
+//   {
+//     brand: 'HONDA',
+//     model: 'CITY',
+//     services: ['TTS-AUTO'],
+//   },
+// ]
+
+
+const brandModelService = [
   {
-    brand: 'HONDA',
-    model: 'CIVIC',
-    services: ['TTS-AUTO'],
-  },
-  {
-    brand: 'HONDA',
-    model: 'ACCORD',
-    services: ['TTS-AUTO'],
-  },
-  {
-    brand: 'HONDA',
+    name: 'HONDA',
     model: 'CITY',
-    services: ['TTS-AUTO'],
+    service: 'TTS-AUTO',
+    works: [
+      {
+        operation: 'Замена масла',
+        price: 1400,
+      },
+      {
+        operation: 'Замена тормозных колодок',
+        price: 1900,
+      },
+      {
+        operation: 'Замена воздушного фильтра',
+        price: 400,
+      },
+      {
+        operation: 'Замена свечей',
+        price: 900,
+      }
+    ]
+  },
+  {
+    name: 'HONDA',
+    model: 'CIVIC',
+    service: 'TTS-AUTO',
+    works: [
+      {
+        operation: 'Замена масла',
+        price: 1500,
+      },
+      {
+        operation: 'Замена тормозных колодок',
+        price: 2000,
+      },
+      {
+        operation: 'Замена воздушного фильтра',
+        price: 500,
+      },
+      {
+        operation: 'Замена свечей',
+        price: 1000,
+      }
+    ]
+  },
+  {
+    name: 'HONDA',
+    model: 'ACCORD',
+    service: 'TTS-AUTO',
+    works: [
+      {
+        operation: 'Замена масла',
+        price: 1600,
+      },
+      {
+        operation: 'Замена тормозных колодок',
+        price: 2100,
+      },
+      {
+        operation: 'Замена воздушного фильтра',
+        price: 600,
+      },
+      {
+        operation: 'Замена свечей',
+        price: 1100,
+      }
+    ]
+  },
+  {
+    name: 'TOYOTA',
+    model: 'COROLLA',
+    service: 'TTS-AUTO',
+    works: [
+      {
+        operation: 'Замена масла',
+        price: 1600,
+      },
+      {
+        operation: 'Замена тормозных колодок',
+        price: 2100,
+      },
+      {
+        operation: 'Замена воздушного фильтра',
+        price: 600,
+      },
+      {
+        operation: 'Замена свечей',
+        price: 1100,
+      }
+    ]
+  },
+  {
+    name: 'TOYOTA',
+    model: 'CAMRY',
+    service: 'TTS-AUTO',
+    works: [
+      {
+        operation: 'Замена масла',
+        price: 1700,
+      },
+      {
+        operation: 'Замена тормозных колодок',
+        price: 2200,
+      },
+      {
+        operation: 'Замена воздушного фильтра',
+        price: 700,
+      },
+      {
+        operation: 'Замена свечей',
+        price: 1200,
+      }
+    ]
+  },
+  {
+    name: 'TOYOTA',
+    model: 'RAV-4',
+    service: 'TTS-AUTO',
+    works: [
+      {
+        operation: 'Замена масла',
+        price: 1800,
+      },
+      {
+        operation: 'Замена тормозных колодок',
+        price: 2300,
+      },
+      {
+        operation: 'Замена воздушного фильтра',
+        price: 800,
+      },
+      {
+        operation: 'Замена свечей',
+        price: 1300,
+      }
+    ]
+  },
+  {
+    name: 'VOLKSWAGEN',
+    model: 'POLO',
+    service: 'VTM-AUTO',
+    works: [
+      {
+        operation: 'Замена масла',
+        price: 1500,
+      },
+      {
+        operation: 'Замена тормозных колодок',
+        price: 2000,
+      },
+      {
+        operation: 'Замена воздушного фильтра',
+        price: 500,
+      },
+      {
+        operation: 'Замена свечей',
+        price: 1000,
+      }
+    ]
+  },
+  {
+    name: 'VOLKSWAGEN',
+    model: 'JETTA',
+    service: 'VTM-AUTO',
+    works: [
+      {
+        operation: 'Замена масла',
+        price: 1600,
+      },
+      {
+        operation: 'Замена тормозных колодок',
+        price: 2100,
+      },
+      {
+        operation: 'Замена воздушного фильтра',
+        price: 600,
+      },
+      {
+        operation: 'Замена свечей',
+        price: 1100,
+      }
+    ]
+  },
+  {
+    name: 'VOLKSWAGEN',
+    model: 'PASSAT',
+    service: 'VTM-AUTO',
+    works: [
+      {
+        operation: 'Замена масла',
+        price: 1700,
+      },
+      {
+        operation: 'Замена тормозных колодок',
+        price: 2200,
+      },
+      {
+        operation: 'Замена воздушного фильтра',
+        price: 700,
+      },
+      {
+        operation: 'Замена свечей',
+        price: 1200,
+      }
+    ]
+  },
+  {
+    name: 'AUDI',
+    model: 'A6',
+    service: 'VTM-AUTO',
+    works: [
+      {
+        operation: 'Замена масла',
+        price: 1700,
+      },
+      {
+        operation: 'Замена тормозных колодок',
+        price: 2200,
+      },
+      {
+        operation: 'Замена воздушного фильтра',
+        price: 700,
+      },
+      {
+        operation: 'Замена свечей',
+        price: 1200,
+      }
+    ]
+  },
+  {
+    name: 'AUDI',
+    model: 'S6',
+    service: 'VTM-AUTO',
+    works: [
+      {
+        operation: 'Замена масла',
+        price: 1900,
+      },
+      {
+        operation: 'Замена тормозных колодок',
+        price: 2500,
+      },
+      {
+        operation: 'Замена воздушного фильтра',
+        price: 1000,
+      },
+      {
+        operation: 'Замена свечей',
+        price: 1500,
+      }
+    ]
+  },
+  {
+    name: 'AUDI',
+    model: 'RS6',
+    service: 'VTM-AUTO',
+    works: [
+      {
+        operation: 'Замена масла',
+        price: 2000,
+      },
+      {
+        operation: 'Замена тормозных колодок',
+        price: 2600,
+      },
+      {
+        operation: 'Замена воздушного фильтра',
+        price: 1100,
+      },
+      {
+        operation: 'Замена свечей',
+        price: 1600,
+      }
+    ]
+  },
+  {
+    name: 'HONDA',
+    model: 'ACCORD',
+    service: 'GTM-AUTO',
+    works: [
+      {
+        operation: 'Замена масла',
+        price: 1600,
+      },
+      {
+        operation: 'Замена тормозных колодок',
+        price: 2100,
+      },
+      {
+        operation: 'Замена воздушного фильтра',
+        price: 600,
+      },
+      {
+        operation: 'Замена свечей',
+        price: 1100,
+      }
+    ]
+  },
+  {
+    name: 'TOYOTA',
+    model: 'RAV-4',
+    service: 'GTM-AUTO',
+    works: [
+      {
+        operation: 'Замена масла',
+        price: 1800,
+      },
+      {
+        operation: 'Замена тормозных колодок',
+        price: 2300,
+      },
+      {
+        operation: 'Замена воздушного фильтра',
+        price: 800,
+      },
+      {
+        operation: 'Замена свечей',
+        price: 1300,
+      }
+    ]
+  },
+  {
+    name: 'VOLKSWAGEN',
+    model: 'PASSAT',
+    service: 'GTM-AUTO',
+    works: [
+      {
+        operation: 'Замена масла',
+        price: 1700,
+      },
+      {
+        operation: 'Замена тормозных колодок',
+        price: 2200,
+      },
+      {
+        operation: 'Замена воздушного фильтра',
+        price: 700,
+      },
+      {
+        operation: 'Замена свечей',
+        price: 1200,
+      }
+    ]
+  },
+  {
+    name: 'AUDI',
+    model: 'RS6',
+    service: 'GTM-AUTO',
+    works: [
+      {
+        operation: 'Замена масла',
+        price: 2000,
+      },
+      {
+        operation: 'Замена тормозных колодок',
+        price: 2600,
+      },
+      {
+        operation: 'Замена воздушного фильтра',
+        price: 1100,
+      },
+      {
+        operation: 'Замена свечей',
+        price: 1600,
+      }
+    ]
   },
 ]
 
@@ -607,62 +981,83 @@ const createMainWorks = (worksArr, element) => {
 createMainWorks(works, worksBlock);
 
 
-const serviceArr1 = services.map(item => item.models);
-const serviceArr2 = serviceArr1.flat(1);
-
 form.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  const answer = {
+  answerContainer.innerHTML = '';
+
+  const answerForm = {
     auto: null,
     model: null,
     works: [],
   };
 
   const fields = Object.values(event.target);
-  answer.auto = fields[0].value;
-  answer.model = fields[1].value;
+  answerForm.auto = fields[0].value;
+  answerForm.model = fields[1].value;
   const works = fields.splice(2, fields.length - 3);
-
   works.forEach(item => {
     if (item.checked) {
-      answer.works.push(item.value);
+      answerForm.works.push(item.value);
     }
   });
 
-  const matchModel = models.find(item => {
-    const isAuto = item.brand === answer.auto;
-    const isModel = item.model === answer.model;
-    if (isAuto && isModel) return item
+  const matchModel = brandModelService.filter(item => {
+    const isAuto = item.name === answerForm.auto;
+    const isModel = item.model === answerForm.model;
+    if (isAuto && isModel) {
+      return item;
+    }
   });
 
-  const ss = new Set(matchModel.services);
 
-  const service = services.filter(item =>ss.has(item.service));
+  matchModel.forEach(item => {
+    const answerBlock = document.createElement('div');
+    // answerBlock.innerHTML = '';
 
-  console.log(service)
+    const serviceName = document.createElement('h2');
+    serviceName.textContent = item.service;
+    answerBlock.appendChild(serviceName);
+    console.log(serviceName, 'serviceName');
 
+    const brandName = document.createElement('h3');
+    brandName.textContent = item.name;
+    answerBlock.appendChild(brandName);
+    console.log(brandName, 'brandName');
+
+    const modelName = document.createElement('h3');
+    modelName.textContent = item.model;
+    answerBlock.appendChild(modelName);
+    console.log(modelName, 'modelName');
+
+    const worksBlock = document.createElement('ul');
+    const totalPriceBlock = document.createElement('div');
+
+    let totalPrice = 0;
+
+    item.works.forEach(element => {
+      const liWork = document.createElement('li');
+      const liWorkPrice = document.createElement('span');
+      const workAnswer = element.operation;
+      const workAnswerForm = answerForm.works.find(item => item === workAnswer);
+      if (workAnswerForm) {
+        liWork.textContent = element.operation;
+        liWorkPrice.textContent = element.price;
+        liWork.appendChild(liWorkPrice);
+        worksBlock.appendChild(liWork);
+        totalPrice += element.price;
+      }
+    });
+    console.log(worksBlock, 'worksBlock');
+
+
+    totalPriceBlock.textContent = totalPrice;
+    console.log(totalPriceBlock, 'totalPriceBlock');
+
+    answerBlock.appendChild(worksBlock);
+    answerBlock.appendChild(totalPriceBlock);
+
+    answerContainer.insertAdjacentElement("afterbegin", answerBlock);
+
+  })
 });
-// const serviceArr3 = serviceArr2.filter(item => item.model === 'CIVIC');
-
-// const createAnswer = () => {
-//   const selectedNames = Object.values(selectAuto).map(item => item.value);
-//   if (selectedNames.find(item => item === 'TOYOTA')) {
-//     console.log('yes');
-//   }
-// };
-
-// createAnswer();
-
-// const answer = document.createElement('div');
-// answer.innerHTML = '';
-
-// form.addEventListener('submit', e => {
-//   e.preventDefault();
-//   answer.innerHTML = 'Мой ответ';
-//   answerContainer.appendChild(answer);
-// });
-
-// console.dir(serviceArr1, 'serviceArr');
-// console.dir(serviceArr2, 'serviceArr2');
-// console.dir(serviceArr3, 'serviceArr3');
