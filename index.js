@@ -44,74 +44,6 @@ const works = [
 ]
 
 
-// const models = [
-//   {
-//     brand: 'VOLKSWAGEN',
-//     model: 'POLO',
-//     services: ['VTM-AUTO'],
-//   },
-//   {
-//     brand: 'VOLKSWAGEN',
-//     model: 'JETTA',
-//     services: ['VTM-AUTO'],
-//   },
-//   {
-//     brand: 'VOLKSWAGEN',
-//     model: 'PASSAT',
-//     services: ['VTM-AUTO'],
-//   },
-
-//   {
-//     brand: 'AUDI',
-//     model: 'A6',
-//     services: ['VTM-AUTO', 'GTM-AUTO'],
-//   },
-//   {
-//     brand: 'AUDI',
-//     model: 'S6',
-//     services: ['VTM-AUTO', 'GTM-AUTO'],
-//   },
-//   {
-//     brand: 'AUDI',
-//     model: 'RS6',
-//     services: ['VTM-AUTO'],
-//   },
-
-
-//   {
-//     brand: 'TOYOTA',
-//     model: 'COROLLA',
-//     services: ['TTS-AUTO'],
-//   },
-//   {
-//     brand: 'TOYOTA',
-//     model: 'CAMRY',
-//     services: ['TTS-AUTO'],
-//   },
-//   {
-//     brand: 'TOYOTA',
-//     model: 'RAV-4',
-//     services: ['TTS-AUTO'],
-//   },
-
-//   {
-//     brand: 'HONDA',
-//     model: 'CIVIC',
-//     services: ['TTS-AUTO'],
-//   },
-//   {
-//     brand: 'HONDA',
-//     model: 'ACCORD',
-//     services: ['TTS-AUTO'],
-//   },
-//   {
-//     brand: 'HONDA',
-//     model: 'CITY',
-//     services: ['TTS-AUTO'],
-//   },
-// ]
-
-
 const brandModelService = [
   {
     name: 'HONDA',
@@ -396,25 +328,48 @@ const brandModelService = [
     works: [
       {
         operation: 'Замена масла',
-        price: 1600,
+        price: 1700,
       },
       {
         operation: 'Замена тормозных колодок',
-        price: 2100,
+        price: 2200,
       },
       {
         operation: 'Замена воздушного фильтра',
-        price: 600,
+        price: 700,
       },
       {
         operation: 'Замена свечей',
-        price: 1100,
+        price: 1200,
       }
     ]
   },
   {
     name: 'TOYOTA',
     model: 'RAV-4',
+    service: 'GTM-AUTO',
+    works: [
+      {
+        operation: 'Замена масла',
+        price: 1900,
+      },
+      {
+        operation: 'Замена тормозных колодок',
+        price: 2400,
+      },
+      {
+        operation: 'Замена воздушного фильтра',
+        price: 900,
+      },
+      {
+        operation: 'Замена свечей',
+        price: 1400,
+      }
+    ]
+  },
+  {
+    name: 'VOLKSWAGEN',
+    model: 'PASSAT',
     service: 'GTM-AUTO',
     works: [
       {
@@ -436,48 +391,25 @@ const brandModelService = [
     ]
   },
   {
-    name: 'VOLKSWAGEN',
-    model: 'PASSAT',
-    service: 'GTM-AUTO',
-    works: [
-      {
-        operation: 'Замена масла',
-        price: 1700,
-      },
-      {
-        operation: 'Замена тормозных колодок',
-        price: 2200,
-      },
-      {
-        operation: 'Замена воздушного фильтра',
-        price: 700,
-      },
-      {
-        operation: 'Замена свечей',
-        price: 1200,
-      }
-    ]
-  },
-  {
     name: 'AUDI',
     model: 'RS6',
     service: 'GTM-AUTO',
     works: [
       {
         operation: 'Замена масла',
-        price: 2000,
+        price: 2100,
       },
       {
         operation: 'Замена тормозных колодок',
-        price: 2600,
+        price: 2700,
       },
       {
         operation: 'Замена воздушного фильтра',
-        price: 1100,
+        price: 1200,
       },
       {
         operation: 'Замена свечей',
-        price: 1600,
+        price: 1700,
       }
     ]
   },
@@ -915,6 +847,8 @@ const carsNames = cars.map(item => item.name);
 const worksNames = works.map(item => item.operation);
 const worksId = works.map(item => item.id);
 
+
+
 const createSelect = (selectName, className) => {
   const select = document.createElement("select");
   select.name = selectName;
@@ -940,35 +874,6 @@ const createDefaultOption = (select, element, className) => {
   select.appendChild(defaultOption);
 };
 
-
-const selectAuto = createSelect('auto', 'auto');
-createDefaultOption(selectAuto, 'AUTO', 'auto_item');
-createOptions(carsNames, selectAuto, 'auto_item');
-carsBlock.insertAdjacentElement('beforeend', selectAuto);
-
-
-const selectModels = createSelect('model', 'model');
-selectModels.disabled = true;
-modelsBlock.insertAdjacentElement('beforeend', selectModels);
-
-
-selectAuto.addEventListener('change', () => {
-  const choosingAuto = selectAuto.value;
-  const brand = cars.find(item => item.name == choosingAuto);
-  selectModels.innerHTML = '';
-  if (brand) {
-    createDefaultOption(selectModels, 'MODEL', 'model_item');
-    createOptions(brand.models, selectModels, 'model_item');
-    selectModels.disabled = false;
-    buttonSubmit.disabled = false;
-
-  } else {
-    selectModels.disabled = true;
-  }
-});
-
-
-
 const createMainWorks = (worksArr, element) => {
   worksArr.forEach(item => {
     const divInput = document.createElement('div');
@@ -989,99 +894,128 @@ const createMainWorks = (worksArr, element) => {
   });
 };
 
-createMainWorks(works, worksBlock);
-
-
-form.addEventListener('submit', (event) => {
-  event.preventDefault();
-
-  answerContainer.innerHTML = '';
-
-  const answerForm = {
-    auto: null,
-    model: null,
-    works: [],
-  };
-
-  const fields = Object.values(event.target);
-  answerForm.auto = fields[0].value;
-  answerForm.model = fields[1].value;
-  const works = fields.splice(2, fields.length - 3);
-  works.forEach(item => {
-    if (item.checked) {
-      answerForm.works.push(item.value);
+const selectAutoListener = (itemAuto, itemModel) => {
+  itemAuto.addEventListener('change', () => {
+    const choosingAuto = itemAuto.value;
+    const brand = cars.find(item => item.name == choosingAuto);
+    itemModel.innerHTML = '';
+    if (brand) {
+      createDefaultOption(itemModel, 'MODEL', 'model_item');
+      createOptions(brand.models, itemModel, 'model_item');
+      itemModel.disabled = false;
+      buttonSubmit.disabled = false;
+  
+    } else {
+      itemModel.disabled = true;
     }
   });
+};
 
-  const matchModel = brandModelService.filter(item => {
-    const isAuto = item.name === answerForm.auto;
-    const isModel = item.model === answerForm.model;
-    if (isAuto && isModel) {
-      return item;
-    }
-  });
-
-
-  matchModel.forEach(item => {
-    const answerBlock = document.createElement('div');
-    answerBlock.className = 'answer_block';
-
-    const serviceName = document.createElement('h2');
-    serviceName.textContent = 'сервис: ' + item.service;
-    serviceName.className = 'service_name';
-    answerBlock.appendChild(serviceName);
-    console.log(serviceName, 'serviceName');
-
-    const brandName = document.createElement('h4');
-    brandName.textContent = item.name;
-    brandName.className = 'auto_name';
-    answerBlock.appendChild(brandName);
-    console.log(brandName, 'brandName');
-
-    const modelName = document.createElement('h4');
-    modelName.textContent = item.model;
-    modelName.className = 'model_name';
-    answerBlock.appendChild(modelName);
-    console.log(modelName, 'modelName');
-
-    const worksBlock = document.createElement('ul');
-    worksBlock.className = 'answer_works_block';
-
-    const totalPriceBlock = document.createElement('div');
-    totalPriceBlock.className = 'total_price_block';
-
-    const spanPrice = document.createElement('span');
-    spanPrice.textContent = 'общая стоимость: ';
-    spanPrice.className = 'total_price'
-    totalPriceBlock.append(spanPrice);
-
-    const totalPrice = document.createElement('span');
-    totalPrice.className = 'total_price_sum';
-
-    let totalPriceSum = 0;
-    item.works.forEach(element => {
-      const liWork = document.createElement('li');
-      const liWorkPrice = document.createElement('span');
-      const workAnswer = element.operation;
-      const workAnswerForm = answerForm.works.find(item => item === workAnswer);
-      if (workAnswerForm) {
-        liWork.textContent = element.operation + ': ';
-        liWorkPrice.textContent = element.price + ' р.';
-        liWork.appendChild(liWorkPrice);
-        worksBlock.appendChild(liWork);
-        totalPriceSum += element.price;
+const formListener = (element) => {
+  element.addEventListener('submit', (event) => {
+    event.preventDefault();
+  
+    answerContainer.innerHTML = '';
+  
+    const answerForm = {
+      auto: null,
+      model: null,
+      works: [],
+    };
+  
+    const fields = Object.values(event.target);
+    answerForm.auto = fields[0].value;
+    answerForm.model = fields[1].value;
+    const works = fields.splice(2, fields.length - 3);
+    works.forEach(item => {
+      if (item.checked) {
+        answerForm.works.push(item.value);
       }
     });
-    console.log(worksBlock, 'worksBlock');
-    totalPrice.textContent = totalPriceSum + ' р.';
+  
+    const matchModel = brandModelService.filter(item => {
+      const isAuto = item.name === answerForm.auto;
+      const isModel = item.model === answerForm.model;
+      if (isAuto && isModel) return item;
+    });
+  
+    matchModel.forEach(item => {
+      const answerBlock = document.createElement('div');
+      answerBlock.className = 'answer_block';
+  
+      const serviceName = document.createElement('h2');
+      serviceName.textContent = 'сервис: ' + item.service;
+      serviceName.className = 'service_name';
+      answerBlock.appendChild(serviceName);
+      console.log(serviceName, 'serviceName');
+  
+      const brandName = document.createElement('h4');
+      brandName.textContent = item.name;
+      brandName.className = 'auto_name';
+      answerBlock.appendChild(brandName);
+      console.log(brandName, 'brandName');
+  
+      const modelName = document.createElement('h4');
+      modelName.textContent = item.model;
+      modelName.className = 'model_name';
+      answerBlock.appendChild(modelName);
+      console.log(modelName, 'modelName');
+  
+      const worksBlock = document.createElement('ul');
+      worksBlock.className = 'answer_works_block';
+  
+      const totalPriceBlock = document.createElement('div');
+      totalPriceBlock.className = 'total_price_block';
+  
+      const spanPrice = document.createElement('span');
+      spanPrice.textContent = 'общая стоимость: ';
+      spanPrice.className = 'total_price'
+      totalPriceBlock.append(spanPrice);
+  
+      const totalPrice = document.createElement('span');
+      totalPrice.className = 'total_price_sum';
+  
+      let totalPriceSum = 0;
+      item.works.forEach(element => {
+        const liWork = document.createElement('li');
+        const liWorkPrice = document.createElement('span');
+        const workAnswer = element.operation;
+        const workAnswerForm = answerForm.works.find(item => item === workAnswer);
+        if (workAnswerForm) {
+          liWork.textContent = element.operation + ': ';
+          liWorkPrice.textContent = element.price + ' р.';
+          liWork.appendChild(liWorkPrice);
+          worksBlock.appendChild(liWork);
+          totalPriceSum += element.price;
+        }
+      });
+      console.log(worksBlock, 'worksBlock');
+      totalPrice.textContent = totalPriceSum + ' р.';
+  
+      
+  
+      totalPriceBlock.append(totalPrice);
+      console.log(totalPriceBlock, 'totalPriceBlock');
+  
+      answerBlock.appendChild(worksBlock);
+      answerBlock.appendChild(totalPriceBlock);
+  
+      answerContainer.insertAdjacentElement("afterbegin", answerBlock);
+    });
+  });
+};
 
-    totalPriceBlock.append(totalPrice);
-    console.log(totalPriceBlock, 'totalPriceBlock');
+const selectAuto = createSelect('auto', 'auto');
+createDefaultOption(selectAuto, 'AUTO', 'auto_item');
+createOptions(carsNames, selectAuto, 'auto_item');
+carsBlock.insertAdjacentElement('beforeend', selectAuto);
 
-    answerBlock.appendChild(worksBlock);
-    answerBlock.appendChild(totalPriceBlock);
+const selectModels = createSelect('model', 'model');
+selectModels.disabled = true;
+modelsBlock.insertAdjacentElement('beforeend', selectModels);
 
-    answerContainer.insertAdjacentElement("afterbegin", answerBlock);
+createMainWorks(works, worksBlock);
 
-  })
-});
+selectAutoListener(selectAuto, selectModels);
+
+formListener(form);
