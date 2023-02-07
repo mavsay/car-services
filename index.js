@@ -909,7 +909,7 @@ const servicesBlock = document.querySelector('.button_submit');
 const answerContainer = document.querySelector('.answer_container');
 const form = document.querySelector('.form');
 const buttonSubmit = document.querySelector('.button_submit');
-// buttonSubmit.disabled = true;
+buttonSubmit.disabled = true;
 
 const carsNames = cars.map(item => item.name);
 const worksNames = works.map(item => item.operation);
@@ -923,24 +923,27 @@ const createSelect = (selectName, className) => {
   return select;
 }
 
-const createOptions = (options, element) => {
+const createOptions = (options, element, className) => {
   options.forEach(item => {
     const option = document.createElement("option");
     option.value = item;
     option.text = item;
+    option.className = className;
     element.appendChild(option);
   });
 };
 
-const createDefaultOption = (element) => {
+const createDefaultOption = (select, element, className) => {
   const defaultOption = document.createElement('option');
   defaultOption.text = element;
-  selectAuto.appendChild(defaultOption);
+  defaultOption.className = className;
+  select.appendChild(defaultOption);
 };
 
+
 const selectAuto = createSelect('auto', 'auto');
-createDefaultOption('AUTO');
-createOptions(carsNames, selectAuto);
+createDefaultOption(selectAuto, 'AUTO', 'auto_item');
+createOptions(carsNames, selectAuto, 'auto_item');
 carsBlock.insertAdjacentElement('beforeend', selectAuto);
 
 
@@ -954,24 +957,32 @@ selectAuto.addEventListener('change', () => {
   const brand = cars.find(item => item.name == choosingAuto);
   selectModels.innerHTML = '';
   if (brand) {
-    createOptions(brand.models, selectModels);
+    createDefaultOption(selectModels, 'MODEL', 'model_item');
+    createOptions(brand.models, selectModels, 'model_item');
     selectModels.disabled = false;
+    buttonSubmit.disabled = false;
+
   } else {
     selectModels.disabled = true;
   }
 });
 
+
+
 const createMainWorks = (worksArr, element) => {
   worksArr.forEach(item => {
     const divInput = document.createElement('div');
+    divInput.className = 'input_items';
     const input = document.createElement('input');
     input.type = 'checkbox';
     input.id = item.id;
     input.name = item.operation;
     input.value = item.operation;
+    input.className = 'input_work';
     const label = document.createElement('label');
     label.textContent = item.operation;
     label.htmlFor = item.id;
+    label.className = 'label_work';
     divInput.appendChild(input);
     divInput.appendChild(label);
     element.appendChild(divInput);
@@ -1013,45 +1024,58 @@ form.addEventListener('submit', (event) => {
 
   matchModel.forEach(item => {
     const answerBlock = document.createElement('div');
-    // answerBlock.innerHTML = '';
+    answerBlock.className = 'answer_block';
 
     const serviceName = document.createElement('h2');
-    serviceName.textContent = item.service;
+    serviceName.textContent = 'сервис: ' + item.service;
+    serviceName.className = 'service_name';
     answerBlock.appendChild(serviceName);
     console.log(serviceName, 'serviceName');
 
-    const brandName = document.createElement('h3');
+    const brandName = document.createElement('h4');
     brandName.textContent = item.name;
+    brandName.className = 'auto_name';
     answerBlock.appendChild(brandName);
     console.log(brandName, 'brandName');
 
-    const modelName = document.createElement('h3');
+    const modelName = document.createElement('h4');
     modelName.textContent = item.model;
+    modelName.className = 'model_name';
     answerBlock.appendChild(modelName);
     console.log(modelName, 'modelName');
 
     const worksBlock = document.createElement('ul');
+    worksBlock.className = 'answer_works_block';
+
     const totalPriceBlock = document.createElement('div');
+    totalPriceBlock.className = 'total_price_block';
 
-    let totalPrice = 0;
+    const spanPrice = document.createElement('span');
+    spanPrice.textContent = 'общая стоимость: ';
+    spanPrice.className = 'total_price'
+    totalPriceBlock.append(spanPrice);
 
+    const totalPrice = document.createElement('span');
+    totalPrice.className = 'total_price_sum';
+
+    let totalPriceSum = 0;
     item.works.forEach(element => {
       const liWork = document.createElement('li');
       const liWorkPrice = document.createElement('span');
       const workAnswer = element.operation;
       const workAnswerForm = answerForm.works.find(item => item === workAnswer);
       if (workAnswerForm) {
-        liWork.textContent = element.operation;
-        liWorkPrice.textContent = element.price;
+        liWork.textContent = element.operation + ': ';
+        liWorkPrice.textContent = element.price + ' р.';
         liWork.appendChild(liWorkPrice);
         worksBlock.appendChild(liWork);
-        totalPrice += element.price;
+        totalPriceSum += element.price;
       }
     });
     console.log(worksBlock, 'worksBlock');
+    totalPrice.textContent = totalPriceSum + ' р.';
 
-
-    totalPriceBlock.textContent = totalPrice;
+    totalPriceBlock.append(totalPrice);
     console.log(totalPriceBlock, 'totalPriceBlock');
 
     answerBlock.appendChild(worksBlock);

@@ -1,0 +1,97 @@
+.answer_container {
+  display: flex;
+  justify-content: center;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto 40px;
+  padding: 10px;
+  column-gap: 4%;
+}
+
+.answer_block {
+  border: 1px solid #00d7c9;
+  border-radius: 5px;
+  padding: 5px;
+  width: 48%;
+}
+
+.service_name {
+  font-family: 'Reforma-Grotesk-Bold';
+  font-size: 30px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #DB3138;
+  margin-bottom: 5px;
+}
+
+.auto_name {
+  font-family: 'Reforma-Grotesk-Demi';
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #00d7c9;
+}
+
+.model_name {
+  font-family: 'Reforma-Grotesk-Demi';
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #00d7c9;
+  margin-bottom: 10px;
+}
+
+.answer_works_block {
+  font-family: 'Reforma-Grotesk-Medium';
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+
+.answer_works_block li {
+  position: relative;
+  padding-left: 14px;
+  text-transform: uppercase;
+  font-size: 16px;
+  color: #00d7c9;
+}
+
+.answer_works_block li::after {
+  position: absolute;
+  content: '';
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 7px;
+  height: 7px;
+  background-color: #DB3138;
+  border-radius: 50%;
+}
+
+.answer_works_block li span {
+  text-transform: lowercase;
+  font-size: 20px;
+  color: #DB3138;
+}
+
+.total_price_block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total_price {
+  display: block;
+  font-family: 'Reforma-Grotesk-Demi';
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.total_price_sum {
+  display: block;
+  font-family: 'Reforma-Grotesk-Demi';
+  font-size: 26px;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #DB3138;
+}

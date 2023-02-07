@@ -1,0 +1,122 @@
+.form {
+  margin: 40px auto;
+  padding: 10px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.cars {
+  display: flex;
+  justify-content: space-between;
+  /* padding: 0 10px; */
+  /* max-width: 500px; */
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.cars label {
+  color: #DB3138;
+  font-family: 'Reforma-Grotesk-Bold';
+  font-size: 30px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.cars select {
+  background: transparent;
+  color: aquamarine;
+  border: 1px solid #DB3138;
+  border-radius: 5px;
+  font-family: "Reforma-Grotesk-Medium";
+  font-size: 20px;
+  letter-spacing: 0.05em;
+  width: 150px;
+}
+
+.models {
+  display: flex;
+  justify-content: space-between;
+  /* padding: 0 10px; */
+  /* max-width: 500px; */
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.models select {
+  background: transparent;
+  color: aquamarine;
+  border: 1px solid #DB3138;
+  font-family: "Reforma-Grotesk-Medium";
+  border-radius: 5px;
+  font-size: 20px;
+  letter-spacing: 0.05em;
+  width: 150px;
+}
+
+.models label {
+  color: #DB3138;
+  font-family: "Reforma-Grotesk-Bold";
+  letter-spacing: 0.05em;
+  font-size: 30px;
+  text-transform: uppercase;
+}
+
+.models select:disabled {
+  display: none;
+}
+
+.models select {
+  background: transparent;
+  color: aquamarine;
+  border: 1px solid #DB3138;
+  width: 150px;
+}
+
+.works {
+  margin-bottom: 20px;
+}
+
+.works p {
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: "Reforma-Grotesk-Demi";
+  letter-spacing: 0.05em;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #DB3138;
+}
+
+.input_items {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+
+.label_work {
+  color: aquamarine;
+  font-family: "Reforma-Grotesk-Medium";
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 16px;
+}
+
+.button_submit:disabled {
+  opacity: 0.5;
+}
+
+.button_submit {
+  padding: 10px;
+  background-color: rgb(219, 49, 56);
+  font-family: "Reforma-Grotesk-Bold";
+  color: aquamarine;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
