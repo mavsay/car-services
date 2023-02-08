@@ -904,25 +904,36 @@ const selectAutoListener = (itemAuto, itemModel) => {
       createOptions(brand.models, itemModel, 'model_item');
       itemModel.disabled = false;
       buttonSubmit.disabled = false;
-  
     } else {
       itemModel.disabled = true;
     }
   });
 };
 
+const createElement = (teg, className) => {
+  const element = document.createElement(teg);
+  element.className = className;
+  return element;
+};
+
+const createBlock = (block, item, className, name = '', teg = 'h2') => {
+  const element = document.createElement(teg);
+  element.textContent = name + item;
+  element.className = className;
+  block.appendChild(element);
+};
+
 const formListener = (element) => {
   element.addEventListener('submit', (event) => {
     event.preventDefault();
-  
-    answerContainer.innerHTML = '';
-  
+
     const answerForm = {
       auto: null,
       model: null,
       works: [],
     };
-  
+
+    answerContainer.innerHTML = '';
     const fields = Object.values(event.target);
     answerForm.auto = fields[0].value;
     answerForm.model = fields[1].value;
@@ -932,49 +943,21 @@ const formListener = (element) => {
         answerForm.works.push(item.value);
       }
     });
-  
+
     const matchModel = brandModelService.filter(item => {
       const isAuto = item.name === answerForm.auto;
       const isModel = item.model === answerForm.model;
       if (isAuto && isModel) return item;
     });
-  
+
     matchModel.forEach(item => {
-      const answerBlock = document.createElement('div');
-      answerBlock.className = 'answer_block';
-  
-      const serviceName = document.createElement('h2');
-      serviceName.textContent = 'сервис: ' + item.service;
-      serviceName.className = 'service_name';
-      answerBlock.appendChild(serviceName);
-      console.log(serviceName, 'serviceName');
-  
-      const brandName = document.createElement('h4');
-      brandName.textContent = item.name;
-      brandName.className = 'auto_name';
-      answerBlock.appendChild(brandName);
-      console.log(brandName, 'brandName');
-  
-      const modelName = document.createElement('h4');
-      modelName.textContent = item.model;
-      modelName.className = 'model_name';
-      answerBlock.appendChild(modelName);
-      console.log(modelName, 'modelName');
-  
-      const worksBlock = document.createElement('ul');
-      worksBlock.className = 'answer_works_block';
-  
-      const totalPriceBlock = document.createElement('div');
-      totalPriceBlock.className = 'total_price_block';
-  
-      const spanPrice = document.createElement('span');
-      spanPrice.textContent = 'общая стоимость: ';
-      spanPrice.className = 'total_price'
-      totalPriceBlock.append(spanPrice);
-  
-      const totalPrice = document.createElement('span');
-      totalPrice.className = 'total_price_sum';
-  
+      const answerBlock = createElement('div', 'answer_block');
+      createBlock(answerBlock, item.service, 'service_name', 'сервис: ');
+      createBlock(answerBlock, item.name, 'auto_name', '', 'h4');
+      createBlock(answerBlock, item.model, 'model_name', '', 'h4');
+
+      const worksBlock = createElement('ul', 'answer_works_block');
+
       let totalPriceSum = 0;
       item.works.forEach(element => {
         const liWork = document.createElement('li');
@@ -989,17 +972,18 @@ const formListener = (element) => {
           totalPriceSum += element.price;
         }
       });
-      console.log(worksBlock, 'worksBlock');
+
+      const totalPrice = createElement('span', 'total_price_sum');
       totalPrice.textContent = totalPriceSum + ' р.';
-  
-      
-  
+
+      const totalPriceBlock = createElement('div', 'total_price_block');
+      createBlock(totalPriceBlock, '', 'total_price', 'общая стоимость: ', 'span');
+
       totalPriceBlock.append(totalPrice);
-      console.log(totalPriceBlock, 'totalPriceBlock');
-  
+
       answerBlock.appendChild(worksBlock);
       answerBlock.appendChild(totalPriceBlock);
-  
+
       answerContainer.insertAdjacentElement("afterbegin", answerBlock);
     });
   });
